@@ -25,4 +25,7 @@ public class Issue implements SuperEntity{
     @JoinColumn(name = "memberId",referencedColumnName ="id", nullable = false)
     private Member member;
 
+    @ManyToOne
+    @JoinColumn(name = "bookId",referencedColumnName ="id", nullable = false)
+    private Book book;
 }

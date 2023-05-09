@@ -14,5 +14,7 @@ import javax.persistence.Id;
 public class Member implements SuperEntity{
     @Id
     private String id;
-
+    private String name;
+    private String address;
+    private String contact;
 }
