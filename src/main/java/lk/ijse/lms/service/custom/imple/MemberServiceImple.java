@@ -24,7 +24,7 @@ public class MemberServiceImple implements MemberService {
     }
 
     @Override
-    public void delete(String id)  {
+    public void delete(String id) {
         Session session = openSession();
         repo.delete(id, session);
         closeSession(session);
@@ -33,7 +33,7 @@ public class MemberServiceImple implements MemberService {
     @Override
     public void save(MemberDTO memberDTO) {
         Session session = openSession();
-        repo.add(modelMapper.map(memberDTO,Member.class),session);
+        repo.add(modelMapper.map(memberDTO, Member.class), session);
         closeSession(session);
     }
 
@@ -52,5 +52,13 @@ public class MemberServiceImple implements MemberService {
         }.getType());
         closeSession(session);
         return (List<MemberDTO>) map;
+    }
+
+    @Override
+    public boolean isExist(String id) {
+        Session session = openSession();
+        Member member = session.get(Member.class, id);
+        closeSession(session);
+        return member != null;
     }
 }

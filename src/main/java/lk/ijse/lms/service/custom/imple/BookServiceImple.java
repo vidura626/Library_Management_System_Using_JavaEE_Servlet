@@ -26,9 +26,7 @@ public class BookServiceImple implements BookService {
 
     @Override
     public void delete(String id) {
-        Session session = openSession();
-        repo.delete(id, session);
-        closeSession(session);
+        throw new RuntimeException("Delete service which is parameter has String id is not allowed for BookService");
     }
 
     @Override
@@ -40,7 +38,7 @@ public class BookServiceImple implements BookService {
 
     @Override
     public BookDTO search(String id) {
-        return null;
+        throw new RuntimeException("Search service which is parameter has String id is not allowed for BookService");
     }
 
     @Override

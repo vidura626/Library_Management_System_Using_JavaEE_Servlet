@@ -48,23 +48,24 @@ public class BookController extends HttpServlet {
                 case "SEARCH":
                     if (service.isExist(new Book_PK(req.getParameter("id"), req.getParameter("isbn")))) {
                         BookDTO search = service.search(new Book_PK(req.getParameter("id"), req.getParameter("isbn")));
-                        resp.getWriter().write(gson.toJson(new Response(200, "Book found", dataJsonObjectCreator(search))));
+                        resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(200, "Book found", dataJsonObjectCreator(search))));
                     } else {
-                        resp.getWriter().write(gson.toJson(new Response(400, "Book not found", null)));
+                        resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(400, "Book not found", "")));
                     }
                     break;
                 case "GETALL":
                     JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
                     service.getAll().forEach(bookDTO -> arrayBuilder.add(dataJsonObjectCreator(bookDTO)));
                     JsonArray data = arrayBuilder.build();
-                    resp.getWriter().write(gson.toJson(new Response(400, "Success", data)));
+                    resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(200, "Success", data)));
                     break;
                 default:
-                    resp.getWriter().write(gson.toJson(new Response(400, "No option found", null)));
+                    resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(400, "No Option Found", "")));
+
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(gson.toJson(new Response(500, "Error".concat(e.getLocalizedMessage()), null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(500, "Error", "")));
         }
     }
 
@@ -83,15 +84,15 @@ public class BookController extends HttpServlet {
             int remQty = jsonObject.getInt("rem_qty");
 
             if (service.isExist(new Book_PK(bookId, isbn))) {
-                resp.getWriter().write(gson.toJson(new Response(400, "Already Exists", null)));
+                resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(400, "Already Exists", "")));
                 return;
             }
 
             service.save(new BookDTO(bookId, isbn, name, author, description, qty, remQty));
-            resp.getWriter().write(gson.toJson(new Response(200, "Success", null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(200, "Success", "")));
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(gson.toJson(new Response(500, "Error ".concat(e.getLocalizedMessage()), null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(500, "Error ".concat(e.getLocalizedMessage()), "")));
         }
     }
 
@@ -113,15 +114,15 @@ public class BookController extends HttpServlet {
             System.out.println(exist);
             if (exist) {
                 service.update(book);
-                resp.getWriter().write(gson.toJson(new Response(200, "Success", null)));
+                resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(200, "Success", "")));
                 return;
             }
 
-            resp.getWriter().write(gson.toJson(new Response(400, "Book not found", null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(400, "Book not found", "")));
 
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(gson.toJson(new Response(500, "Error ".concat(e.getLocalizedMessage()), null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(500, "Error ".concat(e.getLocalizedMessage()), "")));
         }
     }
 
@@ -132,12 +133,12 @@ public class BookController extends HttpServlet {
         try {
             if (service.isExist(new Book_PK(bookId, isbn))) {
                 service.delete(new Book_PK(bookId, isbn));
-                resp.getWriter().write(gson.toJson(new Response(200, "Delete Success", null)));
+                resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(200, "Delete Success", "")));
                 return;
             }
-            resp.getWriter().write(gson.toJson(new Response(400, "Book not found", null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(400, "Book not found", "")));
         } catch (Exception e) {
-            resp.getWriter().write(gson.toJson(new Response(500, "Error", null)));
+            resp.getWriter().write(String.valueOf(Response.getInstance().generateResponse(500, "Error", "")));
         }
 
     }
