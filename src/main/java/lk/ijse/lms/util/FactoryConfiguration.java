@@ -1,5 +1,7 @@
 package lk.ijse.lms.util;
 
+
+import lk.ijse.lms.contoller.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -9,7 +11,13 @@ public class FactoryConfiguration {
     private SessionFactory sessionFactory;
 
     private FactoryConfiguration() {
-        Configuration configuration = new Configuration().configure();
+        Configuration configuration = new Configuration()
+                .addAnnotatedClass(Book.class)
+                .addAnnotatedClass(Member.class)
+                .addAnnotatedClass(Issue.class)
+                .addAnnotatedClass(Return.class)
+                .addAnnotatedClass(Catogery.class)
+                .addAnnotatedClass(Login.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 
