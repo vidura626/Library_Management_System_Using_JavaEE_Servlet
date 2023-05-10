@@ -53,4 +53,12 @@ public class LoginServiceImple implements LoginService {
         closeSession(session);
         return (List<LoginDTO>) map;
     }
+
+    @Override
+    public boolean isExist(String id) {
+        Session session = openSession();
+        Login load = session.get(Login.class, id);
+        closeSession(session);
+        return load != null;
+    }
 }
