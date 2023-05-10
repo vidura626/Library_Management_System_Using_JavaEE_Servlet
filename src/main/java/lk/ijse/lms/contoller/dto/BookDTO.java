@@ -1,14 +1,16 @@
-package lk.ijse.lms.dto;
+package lk.ijse.lms.contoller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Id;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class BookDTO implements SuperDTO {
-    private String id;
+    private String b_id;
     private String ISBN;
     private String name;
     private String author;

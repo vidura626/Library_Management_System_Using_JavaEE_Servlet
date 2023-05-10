@@ -1,4 +1,4 @@
-package lk.ijse.lms.dto;
+package lk.ijse.lms.contoller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class CatogeryDTO implements SuperDTO {
-    String id;
+    String cat_id;
     String cato_name;
 }

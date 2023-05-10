@@ -1,4 +1,4 @@
-package lk.ijse.lms.dto;
+package lk.ijse.lms.contoller.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class LoginDTO implements SuperDTO {
-    private String id;
+    private String l_id;
     private String name;
     private String address;
     private String username;
