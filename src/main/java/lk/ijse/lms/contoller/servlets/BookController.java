@@ -10,15 +10,12 @@ import lk.ijse.lms.util.Response;
 import org.modelmapper.ModelMapper;
 
 import javax.json.*;
-import javax.persistence.PersistenceException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLIntegrityConstraintViolationException;
-import java.util.List;
 
 @WebServlet(urlPatterns = "/book")
 public class BookController extends HttpServlet {
@@ -49,8 +46,12 @@ public class BookController extends HttpServlet {
         try {
             switch (option) {
                 case "SEARCH":
-                    BookDTO search = service.search(new Book_PK(req.getParameter("id"), req.getParameter("isbn")));
-                    resp.getWriter().write(gson.toJson(new Response(400, "Success", dataJsonObjectCreator(search))));
+                    if (service.isExist(new Book_PK(req.getParameter("id"), req.getParameter("isbn")))) {
+                        BookDTO search = service.search(new Book_PK(req.getParameter("id"), req.getParameter("isbn")));
+                        resp.getWriter().write(gson.toJson(new Response(200, "Book found", dataJsonObjectCreator(search))));
+                    } else {
+                        resp.getWriter().write(gson.toJson(new Response(400, "Book not found", null)));
+                    }
                     break;
                 case "GETALL":
                     JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
@@ -69,16 +70,17 @@ public class BookController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        JsonObject jsonObject = Json.createReader(req.getReader()).readObject();
         Gson gson = new Gson();
 
         try {
-            String bookId = req.getParameter("bookId");
-            String isbn = req.getParameter("isbn");
-            String name = req.getParameter("name");
-            String author = req.getParameter("author");
-            String description = req.getParameter("description");
-            int qty = Integer.parseInt(req.getParameter("qty"));
-            int remQty = Integer.parseInt(req.getParameter("remQty"));
+            String bookId = jsonObject.getString("b_id");
+            String isbn = jsonObject.getString("isbn");
+            String name = jsonObject.getString("name");
+            String author = jsonObject.getString("author");
+            String description = jsonObject.getString("description");
+            int qty = jsonObject.getInt("qty");
+            int remQty = jsonObject.getInt("rem_qty");
 
             if (service.isExist(new Book_PK(bookId, isbn))) {
                 resp.getWriter().write(gson.toJson(new Response(400, "Already Exists", null)));
@@ -89,7 +91,7 @@ public class BookController extends HttpServlet {
             resp.getWriter().write(gson.toJson(new Response(200, "Success", null)));
         } catch (Exception e) {
             e.printStackTrace();
-            resp.getWriter().write(gson.toJson(new Response(500, "Error".concat(e.getLocalizedMessage()), null)));
+            resp.getWriter().write(gson.toJson(new Response(500, "Error ".concat(e.getLocalizedMessage()), null)));
         }
     }
 
