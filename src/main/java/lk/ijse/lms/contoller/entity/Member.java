@@ -1,4 +1,4 @@
-package lk.ijse.lms.entity;
+package lk.ijse.lms.contoller.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,11 +11,10 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Data
 @Entity
-public class Login implements SuperEntity{
+public class Member implements SuperEntity{
     @Id
-    private String id;
+    private String m_id;
     private String name;
     private String address;
-    private String username;
-    private String password;
+    private String contact;
 }

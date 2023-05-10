@@ -1,4 +1,4 @@
-package lk.ijse.lms.entity;
+package lk.ijse.lms.contoller.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +15,7 @@ import javax.persistence.IdClass;
 @IdClass(Book_PK.class)
 public class Book implements SuperEntity {
     @Id
-    private String id;
+    private String b_id;
     @Id
     private String ISBN;
     private String name;

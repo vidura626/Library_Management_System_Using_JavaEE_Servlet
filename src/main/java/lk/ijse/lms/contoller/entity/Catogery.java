@@ -1,4 +1,4 @@
-package lk.ijse.lms.entity;
+package lk.ijse.lms.contoller.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,6 +13,6 @@ import javax.persistence.Id;
 @Entity
 public class Catogery implements SuperEntity{
     @Id
-    String id;
+    String cat_id;
     String cato_name;
 }

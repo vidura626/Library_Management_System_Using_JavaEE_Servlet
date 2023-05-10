@@ -1,4 +1,4 @@
-package lk.ijse.lms.entity;
+package lk.ijse.lms.contoller.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ import java.time.LocalDate;
 @Entity
 public class Return implements SuperEntity{
     @Id
-    private String id;
+    private String r_id;
     private String state;
     @JsonFormat(pattern = "yyyy-MM-dd")
-    LocalDate returnedDate;
+    private LocalDate returnedDate;
 }
