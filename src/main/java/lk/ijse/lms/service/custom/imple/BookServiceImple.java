@@ -57,9 +57,16 @@ public class BookServiceImple implements BookService {
     public BookDTO search(Book_PK book_pk) {
         Session session = openSession();
         Book book = session.get(Book.class, modelMapper.map(book_pk, lk.ijse.lms.entity.Book_PK.class));
-        System.out.println(book);
         closeSession(session);
         return modelMapper.map(book, BookDTO.class);
+    }
+
+    @Override
+    public void delete(Book_PK book_pk) {
+        Session session = openSession();
+        Book load = session.load(Book.class, modelMapper.map(book_pk, lk.ijse.lms.entity.Book_PK.class));
+        session.delete(load);
+        closeSession(session);
     }
 
     @Override

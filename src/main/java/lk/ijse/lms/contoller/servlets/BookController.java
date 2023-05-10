@@ -125,6 +125,18 @@ public class BookController extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        String bookId = req.getParameter("bookId");
+        String isbn = req.getParameter("isbn");
+        try {
+            if (service.isExist(new Book_PK(bookId, isbn))) {
+                service.delete(new Book_PK(bookId, isbn));
+                resp.getWriter().write(gson.toJson(new Response(200, "Delete Success", null)));
+                return;
+            }
+            resp.getWriter().write(gson.toJson(new Response(400, "Book not found", null)));
+        } catch (Exception e) {
+            resp.getWriter().write(gson.toJson(new Response(500, "Error", null)));
+        }
+
     }
 }

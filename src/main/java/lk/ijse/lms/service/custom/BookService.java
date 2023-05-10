@@ -6,5 +6,6 @@ import lk.ijse.lms.service.SubServices;
 
 public interface BookService extends SubServices<BookDTO> {
     BookDTO search(Book_PK book_pk);
+    void delete(Book_PK book_pk);
     boolean isExist(Book_PK book_pk);
 }
