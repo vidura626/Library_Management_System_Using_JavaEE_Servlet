@@ -1,8 +1,7 @@
-package lk.ijse.lms.repository.custom.imple;
+package lk.ijse.lms.contoller.repository.custom.imple;
 
-import lk.ijse.lms.entity.Catogery;
-import lk.ijse.lms.entity.Issue;
-import lk.ijse.lms.repository.custom.IssueRepo;
+import lk.ijse.lms.contoller.entity.Issue;
+import lk.ijse.lms.contoller.repository.custom.IssueRepo;
 import org.hibernate.Session;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class IssueRepoImple implements IssueRepo {
 
     @Override
     public void delete(String s, Session session) {
-        session.delete(session.load(Catogery.class, s));
+        session.delete(session.load(Issue.class, s));
     }
 
     @Override

@@ -1,6 +1,6 @@
-package lk.ijse.lms.repository;
+package lk.ijse.lms.contoller.repository;
 
-import lk.ijse.lms.entity.SuperEntity;
+import lk.ijse.lms.contoller.entity.SuperEntity;
 import org.hibernate.Session;
 
 import java.io.Serializable;

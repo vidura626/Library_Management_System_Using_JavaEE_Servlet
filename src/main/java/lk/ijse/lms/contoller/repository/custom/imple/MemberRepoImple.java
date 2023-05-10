@@ -1,9 +1,9 @@
-package lk.ijse.lms.repository.custom.imple;
+package lk.ijse.lms.contoller.repository.custom.imple;
 
-import lk.ijse.lms.entity.Member;
-import lk.ijse.lms.repository.custom.MemberRepo;
+import lk.ijse.lms.contoller.repository.custom.MemberRepo;
 import org.hibernate.Session;
 
+import lk.ijse.lms.contoller.entity.Member;
 import java.util.List;
 
 public class MemberRepoImple implements MemberRepo {

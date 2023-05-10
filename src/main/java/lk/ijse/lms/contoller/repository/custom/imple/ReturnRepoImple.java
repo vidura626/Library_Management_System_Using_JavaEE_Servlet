@@ -1,7 +1,7 @@
-package lk.ijse.lms.repository.custom.imple;
+package lk.ijse.lms.contoller.repository.custom.imple;
 
-import lk.ijse.lms.entity.Return;
-import lk.ijse.lms.repository.custom.ReturnRepo;
+import lk.ijse.lms.contoller.entity.Return;
+import lk.ijse.lms.contoller.repository.custom.ReturnRepo;
 import org.hibernate.Session;
 
 import java.util.List;

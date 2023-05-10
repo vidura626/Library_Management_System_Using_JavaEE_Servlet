@@ -1,7 +1,7 @@
-package lk.ijse.lms.repository.custom.imple;
+package lk.ijse.lms.contoller.repository.custom.imple;
 
-import lk.ijse.lms.entity.Login;
-import lk.ijse.lms.repository.custom.LoginRepo;
+import lk.ijse.lms.contoller.entity.Login;
+import lk.ijse.lms.contoller.repository.custom.LoginRepo;
 import org.hibernate.Session;
 
 import java.util.List;

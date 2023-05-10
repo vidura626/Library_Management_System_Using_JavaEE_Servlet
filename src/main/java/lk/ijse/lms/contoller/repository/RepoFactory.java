@@ -1,6 +1,6 @@
-package lk.ijse.lms.repository;
+package lk.ijse.lms.contoller.repository;
 
-import lk.ijse.lms.repository.custom.imple.*;
+import lk.ijse.lms.contoller.repository.custom.imple.*;
 
 public class RepoFactory {
     private static RepoFactory repoFactory;
@@ -20,15 +20,15 @@ public class RepoFactory {
     public SuperRepo getRepo(RepoTypes types) {
         switch (types) {
             case LOGIN:
-                return new LoginARepoImple();
+                return (SuperRepo) new LoginARepoImple();
             case BOOK:
-                return new BookRepoImple();
+                return (SuperRepo) new BookRepoImple();
             case ISSUE:
-                return new IssueRepoImple();
+                return (SuperRepo) new IssueRepoImple();
             case MEMBER:
-                return new MemberRepoImple();
+                return (SuperRepo) new MemberRepoImple();
             case RETURN:
-                return new ReturnRepoImple();
+                return (SuperRepo) new ReturnRepoImple();
             case CATOGERY:
                 return new CatogeryRepoImple();
             default:

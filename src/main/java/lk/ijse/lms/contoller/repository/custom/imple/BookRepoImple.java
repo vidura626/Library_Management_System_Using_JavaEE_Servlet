@@ -1,7 +1,7 @@
-package lk.ijse.lms.repository.custom.imple;
+package lk.ijse.lms.contoller.repository.custom.imple;
 
-import lk.ijse.lms.entity.Book;
-import lk.ijse.lms.repository.custom.BookRepo;
+import lk.ijse.lms.contoller.entity.Book;
+import lk.ijse.lms.contoller.repository.custom.BookRepo;
 import org.hibernate.Session;
 
 import java.util.List;
