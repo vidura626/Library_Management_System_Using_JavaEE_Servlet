@@ -1,6 +1,7 @@
 package lk.ijse.lms.service.custom.imple;
 
 import lk.ijse.lms.dto.BookDTO;
+import lk.ijse.lms.dto.Book_PK;
 import lk.ijse.lms.entity.Book;
 import lk.ijse.lms.repository.RepoFactory;
 import lk.ijse.lms.repository.custom.BookRepo;
@@ -14,41 +15,37 @@ import java.util.List;
 
 public class BookServiceImple implements BookService {
     BookRepo repo = (BookRepo) RepoFactory.getInstance().getRepo(RepoFactory.RepoTypes.BOOK);
-    Session session = FactoryConfiguration.getInstance().operSession();
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public void update(BookDTO bookDTO){
-        openSession(session);
+    public void update(BookDTO bookDTO) {
+        Session session = openSession();
         repo.update(modelMapper.map(bookDTO, Book.class), session);
         closeSession(session);
     }
 
     @Override
-    public void delete(String id){
-        openSession(session);
+    public void delete(String id) {
+        Session session = openSession();
         repo.delete(id, session);
         closeSession(session);
     }
 
     @Override
-    public void save(BookDTO bookDTO){
-        openSession(session);
+    public void save(BookDTO bookDTO) {
+        Session session = openSession();
         repo.add(modelMapper.map(bookDTO, Book.class), session);
         closeSession(session);
     }
 
     @Override
-    public BookDTO search(String id){
-        openSession(session);
-        BookDTO map = modelMapper.map(repo.search(id, session), BookDTO.class);
-        closeSession(session);
-        return map;
+    public BookDTO search(String id) {
+        return null;
     }
 
     @Override
     public List<BookDTO> getAll() {
-        openSession(session);
+        Session session = openSession();
         List from_book = session.createQuery("from Book").setCacheable(true).getResultList();
         Object map = modelMapper.map(from_book, new TypeToken<List<BookDTO>>() {
         }.getType());
@@ -56,4 +53,20 @@ public class BookServiceImple implements BookService {
         return (List<BookDTO>) map;
     }
 
+    @Override
+    public BookDTO search(Book_PK book_pk) {
+        Session session = openSession();
+        Book book = session.get(Book.class, modelMapper.map(book_pk, lk.ijse.lms.entity.Book_PK.class));
+        System.out.println(book);
+        closeSession(session);
+        return modelMapper.map(book, BookDTO.class);
+    }
+
+    @Override
+    public boolean isExist(Book_PK book_pk) {
+        Session session = openSession();
+        Book book = session.get(Book.class, modelMapper.map(book_pk, lk.ijse.lms.entity.Book_PK.class));
+        closeSession(session);
+        return book != null;
+    }
 }

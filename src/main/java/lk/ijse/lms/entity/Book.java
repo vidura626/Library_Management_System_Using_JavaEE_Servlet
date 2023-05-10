@@ -20,7 +20,7 @@ public class Book implements SuperEntity {
     private String b_id;
     @Id
     @NotNull
-    private String ISBN;
+    private String isbn;
     @NotNull
     private String name;
     @NotNull

@@ -10,5 +10,5 @@ import java.io.Serializable;
 @Data
 public class Book_PK implements Serializable {
     private String b_id;
-    private String ISBN;
+    private String isbn;
 }

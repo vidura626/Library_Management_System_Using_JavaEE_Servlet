@@ -14,33 +14,32 @@ import java.util.List;
 
 public class ReturnServiceImple implements ReturnService {
     ReturnRepo repo = (ReturnRepo) RepoFactory.getInstance().getRepo(RepoFactory.RepoTypes.RETURN);
-    Session session = FactoryConfiguration.getInstance().operSession();
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public void update(ReturnDTO returnDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.update(modelMapper.map(returnDTO, Return.class), session);
         closeSession(session);
     }
 
     @Override
     public void delete(String id) {
-        openSession(session);
+        Session session = openSession();
         repo.delete(id, session);
         closeSession(session);
     }
 
     @Override
     public void save(ReturnDTO returnDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.add(modelMapper.map(returnDTO, Return.class), session);
         closeSession(session);
     }
 
     @Override
     public ReturnDTO search(String id) {
-        openSession(session);
+        Session session = openSession();
         ReturnDTO map = modelMapper.map(repo.search(id, session), ReturnDTO.class);
         closeSession(session);
         return map;
@@ -48,7 +47,7 @@ public class ReturnServiceImple implements ReturnService {
 
     @Override
     public List<ReturnDTO> getAll() {
-        openSession(session);
+        Session session = openSession();
         Object map = modelMapper.map(repo.getAll(session), new TypeToken<List<ReturnDTO>>() {
         }.getType());
         closeSession(session);

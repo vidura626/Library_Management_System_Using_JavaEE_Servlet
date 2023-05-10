@@ -14,33 +14,32 @@ import java.util.List;
 
 public class LoginServiceImple implements LoginService {
     LoginRepo repo = (LoginRepo) RepoFactory.getInstance().getRepo(RepoFactory.RepoTypes.LOGIN);
-    Session session = FactoryConfiguration.getInstance().operSession();
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public void update(LoginDTO loginDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.update(modelMapper.map(loginDTO, Login.class), session);
         closeSession(session);
     }
 
     @Override
     public void delete(String id) {
-        openSession(session);
+        Session session = openSession();
         repo.delete(id, session);
         closeSession(session);
     }
 
     @Override
     public void save(LoginDTO loginDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.add(modelMapper.map(loginDTO, Login.class), session);
         closeSession(session);
     }
 
     @Override
     public LoginDTO search(String id) {
-        openSession(session);
+        Session session = openSession();
         LoginDTO map = modelMapper.map(repo.search(id, session), LoginDTO.class);
         closeSession(session);
         return map;
@@ -48,11 +47,10 @@ public class LoginServiceImple implements LoginService {
 
     @Override
     public List<LoginDTO> getAll() {
-        openSession(session);
+        Session session = openSession();
         Object map = modelMapper.map(repo.getAll(session), new TypeToken<List<LoginDTO>>() {
         }.getType());
         closeSession(session);
         return (List<LoginDTO>) map;
     }
-
 }

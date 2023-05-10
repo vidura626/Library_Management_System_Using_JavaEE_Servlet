@@ -15,33 +15,32 @@ import java.util.List;
 public class CategoryServiceImple implements CatogeryService {
 
     CatogeryRepo repo = (CatogeryRepo) RepoFactory.getInstance().getRepo(RepoFactory.RepoTypes.CATOGERY);
-    Session session = FactoryConfiguration.getInstance().operSession();
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public void update(CatogeryDTO catogeryDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.update(modelMapper.map(catogeryDTO, Catogery.class), session);
         closeSession(session);
     }
 
     @Override
     public void delete(String id) {
-        openSession(session);
+        Session session = openSession();
         repo.delete(id, session);
         closeSession(session);
     }
 
     @Override
     public void save(CatogeryDTO catogeryDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.add(modelMapper.map(catogeryDTO, Catogery.class), session);
         closeSession(session);
     }
 
     @Override
     public CatogeryDTO search(String id) {
-        openSession(session);
+        Session session = openSession();
         CatogeryDTO map = modelMapper.map(repo.search(id, session), CatogeryDTO.class);
         closeSession(session);
         return map;
@@ -49,7 +48,7 @@ public class CategoryServiceImple implements CatogeryService {
 
     @Override
     public List<CatogeryDTO> getAll() {
-        openSession(session);
+        Session session = openSession();
         Object map = modelMapper.map(repo.getAll(session), new TypeToken<List<CatogeryDTO>>() {
         }.getType());
         closeSession(session);

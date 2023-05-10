@@ -14,19 +14,18 @@ import java.util.List;
 
 public class IssueServiceImple implements IssueService {
     IssueRepo repo = (IssueRepo) RepoFactory.getInstance().getRepo(RepoFactory.RepoTypes.ISSUE);
-    Session session = FactoryConfiguration.getInstance().operSession();
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
     public void save(IssueDTO issueDTO) {
-        openSession(session);
+        Session session = openSession();
         repo.add(modelMapper.map(issueDTO, Issue.class), session);
         closeSession(session);
     }
 
     @Override
     public IssueDTO search(String id) {
-        openSession(session);
+        Session session = openSession();
         IssueDTO map = modelMapper.map(repo.search(id, session), IssueDTO.class);
         closeSession(session);
         return map;
@@ -34,11 +33,10 @@ public class IssueServiceImple implements IssueService {
 
     @Override
     public List<IssueDTO> getAll() {
-        openSession(session);
+        Session session = openSession();
         Object map = modelMapper.map(repo.getAll(session), new TypeToken<List<IssueDTO>>() {
         }.getType());
         closeSession(session);
         return (List<IssueDTO>) map;
     }
-
 }
