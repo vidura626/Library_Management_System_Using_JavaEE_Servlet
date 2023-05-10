@@ -8,6 +8,7 @@ import lk.ijse.lms.service.custom.BookService;
 import lk.ijse.lms.util.FactoryConfiguration;
 import org.hibernate.Session;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 
 import java.util.List;
 
@@ -48,9 +49,11 @@ public class BookServiceImple implements BookService {
     @Override
     public List<BookDTO> getAll() {
         openSession(session);
-        List from_catogery = session.createQuery("from Book").setCacheable(true).getResultList();
+        List from_book = session.createQuery("from Book").setCacheable(true).getResultList();
+        Object map = modelMapper.map(from_book, new TypeToken<List<BookDTO>>() {
+        }.getType());
         closeSession(session);
-        return from_catogery;
+        return (List<BookDTO>) map;
     }
 
 }

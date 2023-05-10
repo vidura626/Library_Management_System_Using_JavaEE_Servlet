@@ -18,7 +18,7 @@ public class IssueServiceImple implements IssueService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public void save(IssueDTO issueDTO)  {
+    public void save(IssueDTO issueDTO) {
         openSession(session);
         repo.add(modelMapper.map(issueDTO, Issue.class), session);
         closeSession(session);

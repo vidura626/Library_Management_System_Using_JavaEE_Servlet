@@ -1,5 +1,6 @@
 package lk.ijse.lms.service;
 
+
 import lk.ijse.lms.dto.SuperDTO;
 
 public interface SubServices<T extends SuperDTO> extends SuperService<T> {

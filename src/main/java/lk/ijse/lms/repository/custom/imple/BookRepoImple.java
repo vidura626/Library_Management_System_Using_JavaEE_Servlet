@@ -1,6 +1,7 @@
 package lk.ijse.lms.repository.custom.imple;
 
 import lk.ijse.lms.entity.Book;
+import lk.ijse.lms.entity.Book_PK;
 import lk.ijse.lms.repository.custom.BookRepo;
 import org.hibernate.Session;
 
@@ -19,7 +20,8 @@ public class BookRepoImple implements BookRepo {
 
     @Override
     public Book search(String s, Session session) {
-        return session.get(Book.class, s);
+        Book_PK book_pk = new Book_PK(s, "2564-2514-6541");
+        return session.get(Book.class, book_pk);
     }
 
     @Override
