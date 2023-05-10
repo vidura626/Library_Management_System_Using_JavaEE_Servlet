@@ -8,38 +8,38 @@ import java.util.List;
 
 public class CatogeryRepoImple implements CatogeryRepo {
     @Override
-    public void add(Catogery catogery, Session session) {
+    public void add(Catogery catogery, Session session) throws Exception {
         session.save(catogery);
     }
 
     @Override
-    public void update(Catogery catogery, Session session) {
+    public void update(Catogery catogery, Session session) throws Exception {
         session.update(catogery);
     }
 
     @Override
-    public Catogery search(String s, Session session) {
+    public Catogery search(String s, Session session) throws Exception {
         return session.get(Catogery.class, s);
     }
 
     @Override
-    public void delete(String s, Session session) {
-        session.delete(session.load(Catogery.class,s));
+    public void delete(String s, Session session) throws Exception {
+        session.delete(session.load(Catogery.class, s));
     }
 
     @Override
-    public List<Catogery> getAll(Session session) {
+    public List<Catogery> getAll(Session session) throws Exception {
         return session.createQuery("from Catogery").setCacheable(true).getResultList();
     }
 
     @Override
-    public String generateNextId(Session session) {
+    public String generateNextId(Session session) throws Exception {
         String lastId = (String) session.createQuery("select b.id from Catogery b order by b.id desc").setCacheable(true).getSingleResult();
         if (lastId == null) {
             return "Cat-001";
         } else {
-            int i = Integer.parseInt(lastId.replace("Cat-", ""))+1;
-            return String.format("Cat-%03d",i);
+            int i = Integer.parseInt(lastId.replace("Cat-", "")) + 1;
+            return String.format("Cat-%03d", i);
         }
     }
 }

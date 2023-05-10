@@ -20,15 +20,15 @@ public class RepoFactory {
     public SuperRepo getRepo(RepoTypes types) {
         switch (types) {
             case LOGIN:
-                return (SuperRepo) new LoginARepoImple();
+                return new LoginARepoImple();
             case BOOK:
-                return (SuperRepo) new BookRepoImple();
+                return new BookRepoImple();
             case ISSUE:
-                return (SuperRepo) new IssueRepoImple();
+                return new IssueRepoImple();
             case MEMBER:
-                return (SuperRepo) new MemberRepoImple();
+                return new MemberRepoImple();
             case RETURN:
-                return (SuperRepo) new ReturnRepoImple();
+                return new ReturnRepoImple();
             case CATOGERY:
                 return new CatogeryRepoImple();
             default:

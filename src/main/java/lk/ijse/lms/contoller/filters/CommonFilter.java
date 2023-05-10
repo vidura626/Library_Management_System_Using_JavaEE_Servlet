@@ -1,12 +1,6 @@
 package lk.ijse.lms.contoller.filters;
 
-import lk.ijse.lms.contoller.entity.Book;
-import lk.ijse.lms.contoller.entity.Catogery;
-import lk.ijse.lms.util.FactoryConfiguration;
-import org.hibernate.Session;
-
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 //@WebFilter(urlPatterns = "/")

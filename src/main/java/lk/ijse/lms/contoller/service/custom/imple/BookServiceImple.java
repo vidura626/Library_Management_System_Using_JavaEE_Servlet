@@ -17,50 +17,40 @@ public class BookServiceImple implements BookService {
     ModelMapper modelMapper = new ModelMapper();
 
     @Override
-    public void update(BookDTO bookDTO) {
-        openSession();
+    public void update(BookDTO bookDTO) throws Exception{
+        openSession(session);
         repo.update(modelMapper.map(bookDTO, Book.class), session);
-        closeSession();
+        closeSession(session);
     }
 
     @Override
-    public void delete(String id) {
-        openSession();
+    public void delete(String id) throws Exception{
+        openSession(session);
         repo.delete(id, session);
-        closeSession();
+        closeSession(session);
     }
 
     @Override
-    public void save(BookDTO bookDTO) {
-        openSession();
+    public void save(BookDTO bookDTO) throws Exception{
+        openSession(session);
         repo.add(modelMapper.map(bookDTO, Book.class), session);
-        closeSession();
+        closeSession(session);
     }
 
     @Override
-    public BookDTO search(String id) {
-        openSession();
+    public BookDTO search(String id) throws Exception{
+        openSession(session);
         BookDTO map = modelMapper.map(repo.search(id, session), BookDTO.class);
-        closeSession();
+        closeSession(session);
         return map;
     }
 
     @Override
     public List<BookDTO> getAll() {
-        openSession();
+        openSession(session);
         List from_catogery = session.createQuery("from Book").setCacheable(true).getResultList();
-        closeSession();
+        closeSession(session);
         return from_catogery;
     }
 
-    @Override
-    public void openSession() {
-        session.beginTransaction();
-    }
-
-    @Override
-    public void closeSession() {
-        session.getTransaction().commit();
-        session.close();
-    }
 }
