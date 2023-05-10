@@ -1,8 +1,8 @@
 package lk.ijse.lms.contoller.servlets;
 
-import lk.ijse.lms.contoller.entity.Book;
-import lk.ijse.lms.contoller.entity.Book_PK;
-import lk.ijse.lms.contoller.entity.Catogery;
+import lk.ijse.lms.entity.Book;
+import lk.ijse.lms.entity.Book_PK;
+import lk.ijse.lms.entity.Catogery;
 import lk.ijse.lms.util.FactoryConfiguration;
 import org.hibernate.Session;
 

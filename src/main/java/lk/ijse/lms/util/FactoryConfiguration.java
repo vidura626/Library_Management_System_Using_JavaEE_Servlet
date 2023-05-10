@@ -1,7 +1,7 @@
 package lk.ijse.lms.util;
 
 
-import lk.ijse.lms.contoller.entity.*;
+import lk.ijse.lms.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
